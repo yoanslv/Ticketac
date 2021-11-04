@@ -10,10 +10,20 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('login', { title: 'Express' });
 });
 
+router.get('/home', function(req, res, next) {
+  res.render('home', { title: 'Express' });
+});
 
+router.get('/notrain', function(req, res, next) {
+  res.render('notrain', { title: 'Express' });
+});
+
+router.get('/sucess', function(req, res, next) {
+  res.render('sucess', { title: 'Express' });
+});
 
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
