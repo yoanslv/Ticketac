@@ -29,6 +29,10 @@ router.get('/basket', function(req, res, next) {
   res.render('basket', { title: 'Express' });
 });
 
+router.get('/mylasttrips', function(req, res, next) {
+  res.render('mylasttrips', { title: 'Express' });
+});
+
 // Remplissage de la base de donnée, une fois suffit
 router.get('/save', async function(req, res, next) {
 
