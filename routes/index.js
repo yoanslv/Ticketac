@@ -11,7 +11,9 @@ var options = {
  };
 
 // --------------------- BDD -----------------------------------------------------
-mongoose.connect('mongodb+srv://XXXXXXXX:*********@XXXXXXXX-0hsfc.mongodb.net/Ticketac?retryWrites=true',
+
+
+mongoose.connect('mongodb+srv://Neera:azerty12@cluster0.almkw.mongodb.net/Ticketac?retryWrites=true&w=majority',
    options,
    function(err) {
     if (err) {
@@ -40,6 +42,11 @@ var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+/* GET LOGIN */
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'Express' });
 });
 
 
