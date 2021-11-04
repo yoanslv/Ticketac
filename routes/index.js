@@ -13,17 +13,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-<<<<<<< HEAD
-router.get('/home', function(req, res, next) {
-  res.render('home', { title: 'Express' });
-});
-
-/* GET LOGIN */
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
-});
-=======
->>>>>>> dd5ab1b13fbfc308b10537de84d74bba82379b89
 
 
 // Remplissage de la base de donnée, une fois suffit
