@@ -1,38 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-const mongoose = require('mongoose');
-
-// useNewUrlParser ;)
-var options = {
-  connectTimeoutMS: 5000,
-  useNewUrlParser: true,
-  useUnifiedTopology: true
- };
-
-// --------------------- BDD -----------------------------------------------------
-
-
-mongoose.connect('mongodb+srv://Neera:azerty12@cluster0.almkw.mongodb.net/Ticketac?retryWrites=true&w=majority',
-   options,
-   function(err) {
-    if (err) {
-      console.log(`error, failed to connect to the database because --> ${err}`);
-    } else {
-      console.info('*** Database Ticketac connection : Success ***');
-    }
-   }
-);
-
-var journeySchema = mongoose.Schema({
-  departure: String,
-  arrival: String,
-  date: Date,
-  departureTime: String,
-  price: Number,
-});
-
-var journeyModel = mongoose.model('journey', journeySchema);
+const journeyModel = require('../models/journeys');
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
@@ -44,10 +13,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/* GET LOGIN */
-router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'Express' });
-});
 
 
 // Remplissage de la base de donnée, une fois suffit
