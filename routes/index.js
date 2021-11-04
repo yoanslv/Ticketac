@@ -24,20 +24,16 @@ router.get('/notrain', function(req, res, next) {
 });
 
 router.post('/sucess', async function(req, res, next) {
-
-  console.log("route post home", req.body);
   
   var departure = req.body.departure
   var arrival = req.body.arrival
-  var date = req.body.date
+  var date = new Date (req.body.date)
 
-  var allTrips = await journeyModel.find({departure: departure, arrival: arrival, Date: date});
-  
-  
-console.log(departure);
-console.log(arrival);
 
-  res.render('sucess', { title: 'Express' });
+  var allTrips = await journeyModel.find({departure, arrival, date});
+
+
+  res.render('sucess', { allTrips });
 });
 
 router.get('/basket', function(req, res, next) {
