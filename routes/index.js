@@ -16,7 +16,9 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-  
+  if(req.session.user == null){
+    res.redirect('/');
+  }
   res.render('home', {basket});
 });
 
@@ -41,7 +43,6 @@ router.post('/sucess', async function(req, res, next) {
 });
 
 router.get('/basket', function(req, res, next) {
-  // if(basket.findIndex(e => e.))
 
   let dateCmd = req.query.date;
 
