@@ -14,6 +14,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
+ // route a supprimer quand les fonction sign in sing up seront ok
+
   res.render('home', { title: 'Express' });
 });
 
@@ -21,7 +23,20 @@ router.get('/notrain', function(req, res, next) {
   res.render('notrain', { title: 'Express' });
 });
 
-router.get('/sucess', function(req, res, next) {
+router.post('/sucess', async function(req, res, next) {
+
+  console.log("route post home", req.body);
+  
+  var departure = req.body.departure
+  var arrival = req.body.arrival
+  var date = req.body.date
+
+  var allTrips = await journeyModel.find({departure: departure, arrival: arrival, Date: date});
+  
+  
+console.log(departure);
+console.log(arrival);
+
   res.render('sucess', { title: 'Express' });
 });
 
