@@ -25,14 +25,13 @@ router.get('/notrain', function(req, res, next) {
 
 router.post('/sucess', async function(req, res, next) {
   
-  var departure = req.body.departure
-  var arrival = req.body.arrival
-  var date = new Date (req.body.date)
 
-
-  var allTrips = await journeyModel.find({departure, arrival, date});
-
-
+  let departure = req.body.departure;
+  let arrival = req.body.arrival;
+  let date = new Date(req.body.date);
+  
+  let allTrips = await journeyModel.find({departure, arrival, date})
+  
   res.render('sucess', { allTrips });
 });
 
