@@ -47,7 +47,10 @@
                         <p class="trajet mb-1 font-weight-bold"><%=trip.departure%> / <%=trip.arrival%></p>
                         <p class= "description mt-3">train departure at : <%=trip.departureTime%></p>
                         <div class= "d-flex flex-row justify-content-center align-items-center font-weight-bold"><h5 class="prix mt-2"><%=trip.price%> €</h5>
-                        <a href="/basket?departure=<%=trip.departure%>&arrival=<%=trip.arrival%>&departureTime=<%=trip.departureTime%>&price=<%=trip.price%>&date=<%=dateCmd%>"> <button type=button class="btn btn-danger ml-3 mr-3 mt-0">OK</button></a>
+                        <a href="/basket?departure=<%=trip.departure%>&arrival=<%=trip.arrival%>&departureTime=<%=trip.departureTime%>&price=<%=trip.price%>&date=<%=dateCmd%>"> 
+
+                      <button id= "confirm button" type=button class="btn btn-danger ml-3 mr-3 mt-0">OK</button>
+                      </a>
                         </div>
 
                       </div>  
@@ -74,6 +77,7 @@
       </div>
 
 
+      
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
