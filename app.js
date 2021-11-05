@@ -18,6 +18,14 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.locals.dateFormat = function(date) {
+  let newDate = new Date(date);
+  let dayNumber = newDate.getDate();
+  let monthNumber = newDate.getMonth()+1;
+  if(newDate.getDate()<10){dayNumber = "0" + newDate.getDate()}
+  if(newDate.getMonth()<10){monthNumber = "0" + newDate.getMonth()}
+  return dayNumber + "/" + monthNumber + "/" + newDate.getFullYear()
+}
 app.use(
   session({
    secret: 'a4f8071f-c873-4447-8ee2',
