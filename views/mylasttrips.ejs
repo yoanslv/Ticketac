@@ -49,20 +49,14 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <% for(var i=0; i<allTrips.length; i++){ %>
                           <tr>
                             <th scope="row">12/05/2018</th>
-                            <td>Paris/Lille</td>
-                            <td>15:00pm</td>
-                            <td>279€</td>
-                            
+                            <td><%=allTrips[0].tripsId.departure%>/<%=allTrips[0].tripsId.arrival%></td>
+                            <td><%=allTrips[0].tripsId.departureTime%>pm</td>
+                            <td><%=allTrips[0].tripsId.price%>€</td>
                           </tr>
-                          <tr>
-                            <th scope="row">26/05/2018</th>
-                            <td>Paris/Marseille</td>
-                            <td>22:00pm</td>
-                            <td>279€</td>
-                            
-                          </tr>
+                          <% } %>
                       
                         </tbody>
                       </table>

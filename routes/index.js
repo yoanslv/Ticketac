@@ -99,13 +99,15 @@ router.get('/checkout', async function(req, res, next) {
   res.render('basket', {basket: req.session.basket, checkout, dateCmd:req.session.dat});
 });
 
-router.get('/mylasttrips', function(req, res, next) {
+router.get('/mylasttrips', async function(req, res, next) {
 
   if(req.session.user == null){
     res.redirect('/');
   }
 
-  res.render('mylasttrips', { title: 'Express' });
+  let allTrips = await userHistoryModel.find({userId: req.session.user.id}).populate("tripsId");
+
+  res.render('mylasttrips', { allTrips });
 });
 
 

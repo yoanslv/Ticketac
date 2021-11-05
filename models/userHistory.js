@@ -5,6 +5,6 @@ var userHistorySchema = mongoose.Schema({
     tripsId: {type: mongoose.Schema.Types.ObjectId, ref:'journeys'}
   });
   
-  var userHistoryModel = mongoose.model('usersHistory', userHistorySchema);
+  var userHistoryModel = mongoose.model('usershistories', userHistorySchema);
 
   module.exports = userHistoryModel;
