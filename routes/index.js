@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 
 const journeyModel = require('../models/journeys');
+const userModel = require('../models/users');
+const userHistoryModel = require('../models/userHistory');
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
@@ -58,41 +60,43 @@ router.get('/basket', function(req, res, next) {
     res.redirect('/');
   }
 
-  let dateCmd = req.query.date;
-
   req.session.basket.push({
+    id: req.query.id,
     departure : req.query.departure,
     arrival : req.query.arrival,
+    date : req.query.date,
     departureTime : req.query.departureTime,
     price : req.query.price
   });
 
-  res.render('basket', { basket:req.session.basket, dateCmd, checkout });
+  res.render('basket', { basket:req.session.basket, checkout });
 });
 
 router.get('/deletetrip', function(req, res, next){
-  let dateCmd = req.query.date;
 
   req.session.basket.splice(req.query.id,1)
 
 
-  res.render('basket', {basket: req.session.basket, dateCmd, checkout})
+  res.render('basket', {basket: req.session.basket, dateCmd:req.session.date, checkout})
 });
 
 
 
-router.get('/checkout', function(req, res, next) {
+router.get('/checkout', async function(req, res, next) {
   if(req.session.user == null){
     res.redirect('/');
   }
   checkout = true;
-  dateCmd = req.query.date;
 
-  /* Send to database */
+  for(var i=0; i<req.session.basket.length; i++){
+    var newUserHistory = new userHistoryModel({
+      userID: req.session.user.id,
+      tripsId: req.session.basket[i].id
+    })
+    await newUserHistory.save();
+  }
 
-  // basket=[];
-
-  res.render('basket', {basket: req.session.basket, checkout, dateCmd});
+  res.render('basket', {basket: req.session.basket, checkout, dateCmd:req.session.dat});
 });
 
 router.get('/mylasttrips', function(req, res, next) {

@@ -80,10 +80,10 @@
                           <tr>
                             <th scope="row">1</th>
                             <td><%=element.departure%> / <%=element.arrival%></td>
-                            <td><%=dateFormat(dateCmd)%></td>
+                            <td><%=dateFormat(element.date)%></td>
                             <td><%=element.departureTime%></td>
                             <td><%=element.price%></td>
-                            <td><a href="/deletetrip?id=<%=count%>&date=<%=dateFormat(dateCmd)%>"><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></a></td>
+                            <td><a href="/deletetrip?id=<%=count%>"><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></a></td>
                           </tr>
                           <% total += Number(element.price);
                            count++; } %>
@@ -94,11 +94,12 @@
                             <td></td>
                             <td></td>
                             <td><%=total%>€</td>
+                            <td></td>
                           </tr>
                         </tbody>
                       </table>
                     <div class= "d-flex flex-row-reverse w-100"> 
-                        <a href="/checkout?date=<%=dateFormat(dateCmd)%>"><button type="submit" class="btn btn-danger mt-4">Confirm</button></a>
+                        <a href="/checkout%>"><button type="submit" class="btn btn-danger mt-4">Confirm</button></a>
                     </div>
                   </div>
                   
