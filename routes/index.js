@@ -164,5 +164,13 @@ router.get('/result', function(req, res, next) {
 
   res.render('index', { title: 'Express' });
 });
+//deconnection
+router.get('/logout', function(req,res,next){
+
+  req.session.user = null;
+
+  res.redirect('/')
+});
+
 
 module.exports = router;
