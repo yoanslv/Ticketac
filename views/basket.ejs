@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Darker+Grotesque&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a41e9403cf.js" crossorigin="anonymous"></script>
   </head>
   <body>
     
@@ -67,20 +69,24 @@
                             <th scope="col">Date</th>
                             <th scope="col">Departure Time</th>
                             <th scope="col">Price</th>
+                            <th scope="col"></th>
                           </tr>
                         </thead>
                         <tbody>
                           <% let total = 0;
-                            for(element of basket){ %>
+                             let count = 0;
+                            for(element of basket){
+                               %>
                           <tr>
                             <th scope="row">1</th>
                             <td><%=element.departure%> / <%=element.arrival%></td>
                             <td><%=dateFormat(dateCmd)%></td>
                             <td><%=element.departureTime%></td>
                             <td><%=element.price%></td>
+                            <td><a href="/deletetrip?id=<%=count%>&date=<%=dateFormat(dateCmd)%>"><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></a></td>
                           </tr>
                           <% total += Number(element.price);
-                            } %>
+                           count++; } %>
                           
                           <tr class="table-danger">
                             <th scope="row ">Total</th>

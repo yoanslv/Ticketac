@@ -71,11 +71,12 @@ router.get('/basket', function(req, res, next) {
 });
 
 router.get('/deletetrip', function(req, res, next){
+  let dateCmd = req.query.date;
 
   req.session.basket.splice(req.query.id,1)
 
 
-  res.render('basket', {basket: req.session.basket})
+  res.render('basket', {basket: req.session.basket, dateCmd, checkout})
 });
 
 
