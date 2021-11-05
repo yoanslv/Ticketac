@@ -16,16 +16,10 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/home', function(req, res, next) {
-<<<<<<< HEAD
- // route a supprimer quand les fonction sign in sing up seront ok
-
-  res.render('home', { title: 'Express' });
-=======
   if(req.session.user == null){
     res.redirect('/');
   }
   res.render('home', {basket});
->>>>>>> d1e0e8aae41b121723df2184c575c36496e9703e
 });
 
 router.get('/notrain', function(req, res, next) {
