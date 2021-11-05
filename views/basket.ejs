@@ -24,7 +24,7 @@
               </a>
               <div class="header-right ">
               <a href="" ><span class="Connection mr-3 text-danger font-weight-bold">Connection</span></a>
-              <a href="" ><span>My last trip</span></a>
+              <a href="/mylasttrips" ><span>My last trip</span></a>
               </div>
           </nav>
     
@@ -50,33 +50,24 @@
                           </tr>
                         </thead>
                         <tbody>
+                          <% let total = 0;
+                            for(element of basket){ %>
                           <tr>
                             <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@twitter</td>
+                            <td><%=element.departure%> / <%=element.arrival%></td>
+                            <td><%=dateCmd%></td>
+                            <td><%=element.departureTime%></td>
+                            <td><%=element.price%></td>
                           </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>@twitter</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                          </tr>
+                          <% total += Number(element.price);
+                            } %>
+                          
                           <tr class="table-danger">
                             <th scope="row ">Total</th>
                             <td></td>
                             <td></td>
                             <td></td>
-                            <td>490 €</td>
+                            <td><%=total%>€</td>
                           </tr>
                         </tbody>
                       </table>

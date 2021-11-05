@@ -6,37 +6,60 @@ const journeyModel = require('../models/journeys');
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
+let basket = [];
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('login', { title: 'Express' });
+  basket = [];
+  res.render('login', { basket });
 });
 
 router.get('/home', function(req, res, next) {
+<<<<<<< HEAD
  // route a supprimer quand les fonction sign in sing up seront ok
 
   res.render('home', { title: 'Express' });
+=======
+  if(req.session.user == null){
+    res.redirect('/');
+  }
+  res.render('home', {basket});
+>>>>>>> d1e0e8aae41b121723df2184c575c36496e9703e
 });
 
 router.get('/notrain', function(req, res, next) {
-  res.render('notrain', { title: 'Express' });
+  res.render('notrain');
 });
 
 router.post('/sucess', async function(req, res, next) {
   
-
   let departure = req.body.departure;
   let arrival = req.body.arrival;
   let date = new Date(req.body.date);
+  let day = date.getDay();
+  let month = date.getMonth() +1;
   
   let allTrips = await journeyModel.find({departure, arrival, date})
+  if(allTrips.length == 0){
+    res.render('notrain');
+  }
   
-  res.render('sucess', { allTrips });
+  res.render('sucess', { allTrips, dateCmd: req.body.date, day, month });
 });
 
 router.get('/basket', function(req, res, next) {
-  res.render('basket', { title: 'Express' });
+
+  let dateCmd = req.query.date;
+
+  basket.push({
+    departure : req.query.departure,
+    arrival : req.query.arrival,
+    departureTime : req.query.departureTime,
+    price : req.query.price
+  });
+
+  res.render('basket', { basket, dateCmd });
 });
 
 router.get('/mylasttrips', function(req, res, next) {

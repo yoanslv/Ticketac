@@ -13,8 +13,10 @@ router.post('/sign-in', async function(req, res, next) {
     password: req.body.passwordFromFront
   })
   if(searchUser != null){
-    req.session.email = req.body.emailFromFront,
-    req.session.password = req.body.passwordFromFront
+    req.session.user = {
+    email : req.body.emailFromFront,
+    password : req.body.passwordFromFront
+    }
 
     res.redirect('/home')
   }else{
@@ -22,6 +24,7 @@ router.post('/sign-in', async function(req, res, next) {
   }
 
   });
+  
 
 router.post('/sign-up', async function(req, res, next) {
 
@@ -43,7 +46,7 @@ router.post('/sign-up', async function(req, res, next) {
       name: newUserSave.name,
       firstname: newUserSave.firstname,
       email: newUserSave.email,
-      password: newUserSave.password,
+      password: newUserSave.password
     }
   
   
