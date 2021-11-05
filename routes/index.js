@@ -3,7 +3,7 @@ var router = express.Router();
 
 const journeyModel = require('../models/journeys');
 const userModel = require('../models/users');
-const userHistoryModel = require('../models/userHistory');
+const orderModel = require('../models/orders');
 
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
@@ -89,25 +89,25 @@ router.get('/checkout', async function(req, res, next) {
   checkout = true;
 
   for(var i=0; i<req.session.basket.length; i++){
-    var newUserHistory = new userHistoryModel({
+    var newOrder = new orderModel({
       userID: req.session.user.id,
       tripsId: req.session.basket[i].id
     })
-    await newUserHistory.save();
+    await newOrder.save();
   }
 
   res.render('basket', {basket: req.session.basket, checkout, dateCmd:req.session.dat});
 });
 
-router.get('/mylasttrips', async function(req, res, next) {
+router.get('/orders', async function(req, res, next) {
 
   if(req.session.user == null){
     res.redirect('/');
   }
 
-  let allTrips = await userHistoryModel.find({userId: req.session.user.id}).populate("tripsId");
+  let userTrips = await orderModel.find({userId: req.session.user.id}).populate("tripsId");
 
-  res.render('mylasttrips', { allTrips });
+  res.render('orders', { userTrips });
 });
 
 

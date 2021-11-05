@@ -49,12 +49,12 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <% for(var i=0; i<allTrips.length; i++){ %>
+                          <% for(var i=0; i<userTrips.length; i++){ %>
                           <tr>
                             <th scope="row">12/05/2018</th>
-                            <td><%=allTrips[0].tripsId.departure%>/<%=allTrips[0].tripsId.arrival%></td>
-                            <td><%=allTrips[0].tripsId.departureTime%>pm</td>
-                            <td><%=allTrips[0].tripsId.price%>€</td>
+                            <td><%=userTrips[0].tripsId.departure%>/<%=userTrips[0].tripsId.arrival%></td>
+                            <td><%=userTrips[0].tripsId.departureTime%>pm</td>
+                            <td><%=userTrips[0].tripsId.price%>€</td>
                           </tr>
                           <% } %>
                       
