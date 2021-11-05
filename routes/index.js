@@ -6,15 +6,18 @@ const journeyModel = require('../models/journeys');
 var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lille"]
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
-let basket = [];
+
 let checkout = false;
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  basket = [];
+
+  if(req.session.basket == undefined){
+    req.session.basket = []
+  }
   
-  res.render('login', { basket});
+  res.render('login');
 });
 
 router.get('/home', function(req, res, next) {
@@ -22,7 +25,7 @@ router.get('/home', function(req, res, next) {
     res.redirect('/');
   }
   checkout = false;
-  res.render('home', {basket, checkout });
+  res.render('home', {basket:req.session.basket, checkout });
 });
 
 router.get('/notrain', function(req, res, next) {
@@ -36,7 +39,6 @@ router.get('/notrain', function(req, res, next) {
 router.post('/sucess', async function(req, res, next) {
   
   let departure = req.body.departure;
-
   let arrival = req.body.arrival;
   let date = new Date(req.body.date);
   let day = date.getDay();
@@ -58,15 +60,17 @@ router.get('/basket', function(req, res, next) {
 
   let dateCmd = req.query.date;
 
-  basket.push({
+  req.session.basket.push({
     departure : req.query.departure,
     arrival : req.query.arrival,
     departureTime : req.query.departureTime,
     price : req.query.price
   });
 
-  res.render('basket', { basket, dateCmd, checkout });
+  res.render('basket', { basket:req.session.basket, dateCmd, checkout });
 });
+
+
 
 router.get('/checkout', function(req, res, next) {
   if(req.session.user == null){
@@ -75,7 +79,11 @@ router.get('/checkout', function(req, res, next) {
   checkout = true;
   dateCmd = req.query.date;
 
-  res.render('basket', {basket, checkout, dateCmd});
+  /* Send to database */
+
+  // basket=[];
+
+  res.render('basket', {basket: req.session.basket, checkout, dateCmd});
 });
 
 router.get('/mylasttrips', function(req, res, next) {
