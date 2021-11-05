@@ -83,7 +83,7 @@
                             <td><%=dateFormat(dateCmd)%></td>
                             <td><%=element.departureTime%></td>
                             <td><%=element.price%></td>
-                            <td><a href="/deletetrip?id=<%=count%>"><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></a></td>
+                            <td><a href="/deletetrip?id=<%=count%>&date=<%=dateFormat(dateCmd)%>"><button class="btn btn-outline-info btn-sm" name="button"><i class="far fa-trash-alt"></i></button></a></td>
                           </tr>
                           <% total += Number(element.price);
                            count++; } %>
