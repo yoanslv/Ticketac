@@ -7,32 +7,40 @@ var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lil
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 let basket = [];
+let checkout = false;
 
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   basket = [];
-  res.render('login', { basket });
+  
+  res.render('login', { basket});
 });
 
 router.get('/home', function(req, res, next) {
   if(req.session.user == null){
     res.redirect('/');
   }
-  res.render('home', {basket});
+  checkout = false;
+  res.render('home', {basket, checkout });
 });
 
 router.get('/notrain', function(req, res, next) {
+
+  if(req.session.user == null){
+    res.redirect('/');
+  }
   res.render('notrain');
 });
 
 router.post('/sucess', async function(req, res, next) {
   
   let departure = req.body.departure;
+
   let arrival = req.body.arrival;
   let date = new Date(req.body.date);
   let day = date.getDay();
-  let month = date.getMonth() +1;
+  let month = date.getMonth()+1;
   
   let allTrips = await journeyModel.find({departure, arrival, date})
   if(allTrips.length == 0){
@@ -44,6 +52,10 @@ router.post('/sucess', async function(req, res, next) {
 
 router.get('/basket', function(req, res, next) {
 
+  if(req.session.user == null){
+    res.redirect('/');
+  }
+
   let dateCmd = req.query.date;
 
   basket.push({
@@ -53,10 +65,25 @@ router.get('/basket', function(req, res, next) {
     price : req.query.price
   });
 
-  res.render('basket', { basket, dateCmd });
+  res.render('basket', { basket, dateCmd, checkout });
+});
+
+router.get('/checkout', function(req, res, next) {
+  if(req.session.user == null){
+    res.redirect('/');
+  }
+  checkout = true;
+  dateCmd = req.query.date;
+
+  res.render('basket', {basket, checkout, dateCmd});
 });
 
 router.get('/mylasttrips', function(req, res, next) {
+
+  if(req.session.user == null){
+    res.redirect('/');
+  }
+
   res.render('mylasttrips', { title: 'Express' });
 });
 
