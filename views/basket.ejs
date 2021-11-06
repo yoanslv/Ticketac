@@ -20,13 +20,13 @@
         <div class="row headerlogin">
 
           <nav class=" header col-12 navbar navbar-light p-1 bg-light h6 font-weight-normal ">
-              <a class="navbar" href="/">
+              <a class="navbar">
               <img src="/images/train.png" width="30" height="30" class="logo mr-2" alt="">
               Ticketac
               </a>
               <div class="header-right ">
-              <a href="/logout" ><span class="Connection mr-3 text-danger font-weight-bold">Deconnection</span></a>
-              <a href="/mylasttrips" ><span>My last trip</span></a>
+                <a href="/logout" ><span class="Connection mr-3 text-danger font-weight-bold">Deconnection</span></a>
+                <a href="/orders" ><span>My last trip</span></a>
               </div>
           </nav>
     
@@ -105,19 +105,19 @@
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal fade text-dark" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog">
                         <div class="modal-content">
                          <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Confirmation</h5>
                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                          </div>
                          <div class="modal-body">
-                            ...
+                            Do you confirm this order?
                          </div>
                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                       <button type="button" class="btn btn-primary">Understood</button>
+                        <a href="/home" ><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></a>
+                        <a href="/checkout" ><button type="button" class="btn btn-primary">Confirm</button></a>
                        </div>
                         </div>
                          </div>

@@ -9,8 +9,6 @@ var city = ["Paris","Marseille","Nantes","Lyon","Rennes","Melun","Bordeaux","Lil
 var date = ["2018-11-20","2018-11-21","2018-11-22","2018-11-23","2018-11-24"]
 
 
-let checkout = false;
-
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -69,7 +67,7 @@ router.get('/basket', function(req, res, next) {
     price : req.query.price
   });
 
-  res.render('basket', { basket:req.session.basket, checkout });
+  res.render('basket', { basket:req.session.basket });
 });
 
 router.get('/deletetrip', function(req, res, next){
@@ -77,7 +75,7 @@ router.get('/deletetrip', function(req, res, next){
   req.session.basket.splice(req.query.id,1)
 
 
-  res.render('basket', {basket: req.session.basket, dateCmd:req.session.date, checkout})
+  res.render('basket', {basket: req.session.basket, dateCmd:req.session.date})
 });
 
 
@@ -86,7 +84,6 @@ router.get('/checkout', async function(req, res, next) {
   if(req.session.user == null){
     res.redirect('/');
   }
-  checkout = true;
 
   for(var i=0; i<req.session.basket.length; i++){
     var newOrder = new orderModel({
@@ -95,8 +92,9 @@ router.get('/checkout', async function(req, res, next) {
     })
     await newOrder.save();
   }
+  req.session.basket = [];
 
-  res.render('basket', {basket: req.session.basket, checkout, dateCmd:req.session.dat});
+  res.render('basket', {basket: req.session.basket, dateCmd:req.session.dat});
 });
 
 router.get('/orders', async function(req, res, next) {
@@ -104,7 +102,6 @@ router.get('/orders', async function(req, res, next) {
   if(req.session.user == null){
     res.redirect('/');
   }
-
   let userTrips = await orderModel.find({userId: req.session.user.id}).populate("tripsId");
 
   res.render('orders', { userTrips });
